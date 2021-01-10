@@ -231,15 +231,20 @@ public class myBot extends TelegramLongPollingBot {
         keyboardMarkup.setResizeKeyboard(true);
 
         KeyboardButton keyboardButton1 = new KeyboardButton();
+        KeyboardButton keyboardButton2 = new KeyboardButton();
 
         String contacts = "Продолжая работу по отправке заявки на вступление в Ассоциацию  вы подтверждаете свое ознакомление и согласие с Уставом, а также даете согласие на прием и обработку предоставленных персональных данных. Для продолжения нажмите «Подать заявку.";
 
         keyboardButton1.setText("Подать заявку " + EmojiParser.parseToUnicode(":envelope_with_arrow:"));
+        keyboardButton2.setText("Назад " + EmojiParser.parseToUnicode(":back:"));
 
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row1 = new KeyboardRow();
+        KeyboardRow row2 = new KeyboardRow();
         row1.add(keyboardButton1);
+        row2.add(keyboardButton2);
         keyboard.add(row1);
+        keyboard.add(row2);
         keyboardMarkup.setKeyboard(keyboard);
 
         return new SendMessage().setChatId(chatId).setText(contacts).setReplyMarkup(keyboardMarkup);
@@ -253,14 +258,17 @@ public class myBot extends TelegramLongPollingBot {
 
         KeyboardButton keyboardButton1 = new KeyboardButton();
         KeyboardButton keyboardButton2 = new KeyboardButton();
+        KeyboardButton keyboardButton3 = new KeyboardButton();
 
         String pay_income = "Внести взнос";
         if (lng == 1) {
             keyboardButton1.setText("Благотворительный взнос " + EmojiParser.parseToUnicode(":innocent:"));
             keyboardButton2.setText("Взнос на научные цели " + EmojiParser.parseToUnicode(":man_student:"));
+            keyboardButton3.setText("Назад " + EmojiParser.parseToUnicode(":back:"));
         } else if (lng == 2) {
             keyboardButton1.setText("Қайырымдылық көмек " + EmojiParser.parseToUnicode(":innocent:"));
             keyboardButton2.setText("Ғылыми үлес " + EmojiParser.parseToUnicode(":man_student:"));
+            keyboardButton3.setText("Артқа " + EmojiParser.parseToUnicode(":back:"));
             pay_income = "Төлем жасау";
         }
 
@@ -268,7 +276,8 @@ public class myBot extends TelegramLongPollingBot {
         KeyboardRow row1 = new KeyboardRow();
         KeyboardRow row2 = new KeyboardRow();
         row1.add(keyboardButton1);
-        row2.add(keyboardButton2);
+        row1.add(keyboardButton2);
+        row2.add(keyboardButton3);
         keyboard.add(row1);
         keyboard.add(row2);
         keyboardMarkup.setKeyboard(keyboard);
@@ -282,19 +291,25 @@ public class myBot extends TelegramLongPollingBot {
         keyboardMarkup.setResizeKeyboard(true);
 
         KeyboardButton keyboardButton1 = new KeyboardButton();
+        KeyboardButton keyboardButton2 = new KeyboardButton();
 
         String charity = "Благотворительный взнос – это добровольный взнос физлица (или юрлица), предоставленный бюджетному учреждению, которое относится к перечисленным выше сферам благотворительной деятельности. Поэтому сосредоточим внимание на получении благотворительных взносов в денежной форме именно от физлиц.";
         if (lng == 1) {
             keyboardButton1.setText("Осуществить взнос " + EmojiParser.parseToUnicode(":thumbsup:"));
+            keyboardButton2.setText("Назад " + EmojiParser.parseToUnicode(":back:"));
         } else if (lng == 2) {
             keyboardButton1.setText("Төлем жасау " + EmojiParser.parseToUnicode(":thumbsup:"));
+            keyboardButton2.setText("Артқа " + EmojiParser.parseToUnicode(":back:"));
             charity = "Қайырымдылық жарна - бұл жеке тұлғаның (немесе заңды тұлғаның) жоғарыда аталған қайырымдылық қызмет бағыттарына жататын бюджеттік мекемеге берілген ерікті жарнасы. Сондықтан біз қайырымдылық жарналарды жеке тұлғалардан қолма-қол алуға бағытталған боламыз.";
         }
 
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row1 = new KeyboardRow();
+        KeyboardRow row2 = new KeyboardRow();
         row1.add(keyboardButton1);
+        row2.add(keyboardButton2);
         keyboard.add(row1);
+        keyboard.add(row2);
         keyboardMarkup.setKeyboard(keyboard);
 
         return new SendMessage().setChatId(chatId).setText(charity).setReplyMarkup(keyboardMarkup);
@@ -306,18 +321,24 @@ public class myBot extends TelegramLongPollingBot {
         keyboardMarkup.setResizeKeyboard(true);
 
         KeyboardButton keyboardButton1 = new KeyboardButton();
+        KeyboardButton keyboardButton2 = new KeyboardButton();
 
         String science = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat";
         if (lng == 1) {
             keyboardButton1.setText("Осуществить взнос " + EmojiParser.parseToUnicode(":thumbsup:"));
+            keyboardButton2.setText("Назад " + EmojiParser.parseToUnicode(":back:"));
         } else if (lng == 2) {
             keyboardButton1.setText("Төлем жасау " + EmojiParser.parseToUnicode(":thumbsup:"));
+            keyboardButton2.setText("Артқа " + EmojiParser.parseToUnicode(":back:"));
         }
 
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row1 = new KeyboardRow();
+        KeyboardRow row2 = new KeyboardRow();
         row1.add(keyboardButton1);
+        row2.add(keyboardButton2);
         keyboard.add(row1);
+        keyboard.add(row2);
         keyboardMarkup.setKeyboard(keyboard);
 
         return new SendMessage().setChatId(chatId).setText(science).setReplyMarkup(keyboardMarkup);
@@ -556,6 +577,10 @@ public class myBot extends TelegramLongPollingBot {
         else if (back.startsWith("Астана") || back.startsWith("Алматы")){
             back = "Контакты";
             return contactsMenu(update.getMessage().getChatId());
+        }
+        else if (back.startsWith("Благотворительный взнос") || back.startsWith("Взнос на научные цели")){
+            back = "Внести взнос";
+            return PayIncomeMenu(update.getMessage().getChatId());
         }
         return null;
     }
